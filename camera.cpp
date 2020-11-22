@@ -6,10 +6,22 @@ Camera::Camera()
 
 void Camera::open()
 {
-	cap.open(1, cv::CAP_ANY);
-	
+	cap.open(g_CAMERA_INDEX, cv::CAP_V4L);
+	cap.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'));
+
 	if (!isOpened())
-		std::cerr << "Camera cannot be opened" << std::endl;
+	{
+		if (!promt(ERROR, "Camera cannot be opened."))
+		{
+			promt(LOG, "Abort.", 0);
+			g_EXIT = true;
+		}
+		else
+		{
+			promt(LOG, "Forced fallback into the simulation.", 0);
+			g_NO_CAMERA = true;
+		}
+	}
 }
 
 bool Camera::isOpened()

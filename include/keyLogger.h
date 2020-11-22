@@ -22,7 +22,7 @@ public:
 class KeyLogger
 {
 public:
-	
+
 	void addShortcut(char key, void (*action)(void));
 	void update();
 

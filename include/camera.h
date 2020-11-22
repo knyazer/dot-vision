@@ -7,17 +7,19 @@
 #include <opencv2/imgproc.hpp>
 #include <iostream>
 #include "cameraConfig.h"
+#include "asker.h"
+#include "gHeader.h"
 
 class Camera
 {
 public:
 	Camera();
-	
+
 	void open();
 	bool isOpened();
 	void read();
 	void setResolution(int width, int height);
-	
+
 	cv::Mat frame;
 	CameraConfig config;
 private:
